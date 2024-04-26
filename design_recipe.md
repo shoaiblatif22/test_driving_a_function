@@ -4,11 +4,12 @@ Copy this into a `recipe.md` in your project and fill it out.
 
 ## 1. Describe the Problem
 
->>> As a user 
->>> So that i can keep track of my tasks
->>> I want to check if a text includes the string `#TODO`
+> > > As a user
+> > > So that i can keep track of my tasks
+> > > I want to check if a text includes the string `#TODO`
 
 ## 2. Design the Function Signature
+
 ```python
 def tasks(text)
     """Checks if tasks contains the word `#TODO`
@@ -21,6 +22,7 @@ def tasks(text)
 
 
 ```
+
 ## 3. Create Examples as Tests
 
 _Make a list of examples of what the function will take and return._
@@ -28,7 +30,7 @@ _Make a list of examples of what the function will take and return._
 ```python
 # EXAMPLE
 
-#1ST TEST CASE 
+#1ST TEST CASE
 """
 Given a text check that it returns a string within a list
 """
@@ -59,7 +61,7 @@ tasks("hello1 #TODO", "hello2 #TODO", "hello3 #TODO") => ["hello1 #TODO", "hello
 #5 TEST CASE
 
 """
-Given three tasks with two tasks with the #TODO keyword and one task with no keyword, 
+Given three tasks with two tasks with the #TODO keyword and one task with no keyword,
 return the two tasks
 """
 tasks("hello1 #TODO", "hello2", "hello3 #TODO") => ["hello1 #TODO", "hello3 #TODO"]
@@ -85,9 +87,42 @@ def test_text_check_returns_a_list():
     result = tasks("hello world")
     assert result == ["hello world"]
 
+"""
+Given: no text
+When: no string is passed as an argument
+Then: return an empty list
+"""
+def test_no_args_returns_empty_string():
+    result = tasks(" ")
+    assert result == []
+
+"""
+Given: three tasks with no #TODO keyword
+When: when a list is passed as arguments
+Then: return "no tasks to be completed"
+"""
+def test_when_a_list_is_passed_as_an_argument():
+    result = tasks(["hello1", "hello2", "hello3"])
+    assert result == "no tasks to be completed"
 
 
+"""
+Given: three tasks with #TODO keyword
+When: when a list is passed as arguments
+Then: return the list of tasks
+"""
+def test_todo_exists_then_return_list():
+    result = tasks(["hello1 #TODO", "hello2 #TODO", "hello3 #TODO"])
+    assert result == ["hello1 #TODO", "hello2 #TODO", "hello3 #TODO"]
+
+
+"""
+Given:three tasks
+When: one of the tasks has no #TODO keyword
+Then: return the two tasks
+"""
+def test_returns_tasks_with_todo_keyword():
+    result = tasks(["hello1 #TODO", "hello2 #TODO", "hello3"])
+    assert result == ["hello1 #TODO", "hello2 #TODO"]
 
 ```
-
-
